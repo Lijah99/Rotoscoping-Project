@@ -106,7 +106,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="res\colbert2.wmv" />
+    <Content Include="res\amongUsHallway.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="res\colbert2.wmv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="res\colbert_1sec.wmv" />
     <EmbeddedResource Include="res\colbert_5sec.wmv" />
     <EmbeddedResource Include="ffmpeg.exe">

@@ -83,14 +83,19 @@ namespace Rotoscope
         /// </summary>
         public int Width { get => width; set => width = value; }
 
+        public Bitmap BackgroundImage { get => backgroundImage; set => backgroundImage = value; }
+
         private Sound backgroundAudio;
         private Frame curFrame;
+        private Bitmap backgroundImage;
         private double fps = 30;
         private int framenum = 0;
-        private int height = 480;
+        //private int height = 480;
+        private int height = 720;
         private double outputTime = 0;
         private Movie sourceMovie = null;
-        private int width = 720;
+        //private int width = 720;
+        private int width = 1280;
         private ProgressBar bar;
         private Rectangle drawArea = new Rectangle(100, 100, 100, 100);
         private string fmt = "00000";
@@ -621,29 +626,30 @@ namespace Rotoscope
 
             curFrame = new Frame(initial.Image);
 
-
             // Write any saved drawings into the frame
-            LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
-            if (drawList != null)
-            {
-                Point first = drawList.First.Value;
-                Point end = drawList.First.Next.Value;
-                if (BirdDraw)
-                {
-                    Point location = drawList.ElementAt(0);
-                    Graphics g = Graphics.FromImage(curFrame.Image);
-                    bird.SetResolution(g.DpiX, g.DpiY);
-                    int x = location.X - (bird.Width / 2);
-                    int y = location.Y - (bird.Height);
+            //LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
+            //if (drawList != null)
+            //{
+            //    Point first = drawList.First.Value;
+            //    Point end = drawList.First.Next.Value;
+            //    if (BirdDraw)
+            //    {
+            //        Point location = drawList.ElementAt(0);
+            //        Graphics g = Graphics.FromImage(curFrame.Image);
+            //        bird.SetResolution(g.DpiX, g.DpiY);
+            //        int x = location.X - (bird.Width / 2);
+            //        int y = location.Y - (bird.Height);
 
-                    curFrame.DrawImage(x, y, bird);
-                }
+            //        curFrame.DrawImage(x, y, bird);
+            //    }
 
-                DrawLine(first.X, first.Y, end.X, end.Y);
-                RotateVideo(first.X, first.Y, end.X, end.Y);
+            //    //DrawLine(first.X, first.Y, end.X, end.Y);
+            //   // RotateVideo(first.X, first.Y, end.X, end.Y);
 
-            }
-
+            //    //apply greenscreen
+            //    Greenscreen();
+            //}
+            Greenscreen();
             form.Invalidate();
         }
 
@@ -669,6 +675,50 @@ namespace Rotoscope
             g.FillPath(Brushes.Black, graphicsPath);
         }
 
+
+        public void Greenscreen()
+        {
+            // alpha calculation
+            double a1 = 5;
+            double a2 = 1.5;
+            double redForeground;
+            double greenForeground;
+
+
+
+            for (int r = 0; r < curFrame.Image.Height; r++)
+            {
+                for (int c = 0; c < curFrame.Image.Width; c++)
+                {
+                    Color fore = curFrame.Image.GetPixel(c, r);
+                    Color back = backgroundImage.GetPixel(c, r);
+
+                    redForeground = fore.R;
+                    greenForeground = fore.G;
+
+                    double alpha = (1 - a1 * (greenForeground - (a2 * redForeground)));
+                    alpha = Clamp01(alpha);
+
+
+
+                    Color final = Color.FromArgb((int)(alpha * fore.R + (1 - alpha) * back.R),
+                                         (int)(alpha * fore.G + (1 - alpha) * back.G),
+                                         (int)(alpha * fore.B + (1 - alpha) * back.B));
+                    curFrame.Image.SetPixel(c, r, final);
+                }
+            }
+
+        }
+
+        private static double Clamp01(double val)
+        {
+            if (val < 0)
+                val = 0;
+            else if (val > 1)
+                val = 1;
+
+            return val;
+        }
         #endregion
 
 

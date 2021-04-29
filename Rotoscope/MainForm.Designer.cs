@@ -55,6 +55,10 @@
             this.writeThenCreateFrameItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writeThenCreateSecondItem = new System.Windows.Forms.ToolStripMenuItem();
             this.writeThenCreateRemainingItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drawBirdOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.drawBirdOffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDlgRoto = new System.Windows.Forms.OpenFileDialog();
             this.openDlgMovie = new System.Windows.Forms.OpenFileDialog();
             this.openDlgAudio = new System.Windows.Forms.OpenFileDialog();
@@ -62,10 +66,7 @@
             this.saveDlgAudio = new System.Windows.Forms.SaveFileDialog();
             this.openDlgOutMovie = new System.Windows.Forms.OpenFileDialog();
             this.saveDlgOutMovie = new System.Windows.Forms.SaveFileDialog();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.drawBirdOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.drawBirdOffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -157,7 +158,8 @@
             this.generateVideoItem,
             this.toolStripSeparator2,
             this.openAudioItem,
-            this.closeAudioItem});
+            this.closeAudioItem,
+            this.openBackgroundImageToolStripMenuItem});
             this.moviesToolStripMenuItem.Name = "moviesToolStripMenuItem";
             this.moviesToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.moviesToolStripMenuItem.Text = "Movies";
@@ -165,14 +167,14 @@
             // openMovieItem
             // 
             this.openMovieItem.Name = "openMovieItem";
-            this.openMovieItem.Size = new System.Drawing.Size(177, 22);
+            this.openMovieItem.Size = new System.Drawing.Size(206, 22);
             this.openMovieItem.Text = "Open source movie";
             this.openMovieItem.Click += new System.EventHandler(this.openSourceMovieItem_Click);
             // 
             // closeMovieItem
             // 
             this.closeMovieItem.Name = "closeMovieItem";
-            this.closeMovieItem.Size = new System.Drawing.Size(177, 22);
+            this.closeMovieItem.Size = new System.Drawing.Size(206, 22);
             this.closeMovieItem.Text = "Close source movie";
             this.closeMovieItem.Click += new System.EventHandler(this.closeMovieItem_Click);
             // 
@@ -181,45 +183,45 @@
             this.useSourceAudioItem.Checked = true;
             this.useSourceAudioItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.useSourceAudioItem.Name = "useSourceAudioItem";
-            this.useSourceAudioItem.Size = new System.Drawing.Size(177, 22);
+            this.useSourceAudioItem.Size = new System.Drawing.Size(206, 22);
             this.useSourceAudioItem.Text = "Use source audio";
             this.useSourceAudioItem.Click += new System.EventHandler(this.useSourceAudioItem_Click);
             // 
             // pullAudioItem
             // 
             this.pullAudioItem.Name = "pullAudioItem";
-            this.pullAudioItem.Size = new System.Drawing.Size(177, 22);
+            this.pullAudioItem.Size = new System.Drawing.Size(206, 22);
             this.pullAudioItem.Text = "Save movie audio";
             this.pullAudioItem.Click += new System.EventHandler(this.pullAudioItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(203, 6);
             // 
             // generateVideoItem
             // 
             this.generateVideoItem.Name = "generateVideoItem";
-            this.generateVideoItem.Size = new System.Drawing.Size(177, 22);
+            this.generateVideoItem.Size = new System.Drawing.Size(206, 22);
             this.generateVideoItem.Text = "Generate Video";
             this.generateVideoItem.Click += new System.EventHandler(this.generateVideoItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(203, 6);
             // 
             // openAudioItem
             // 
             this.openAudioItem.Name = "openAudioItem";
-            this.openAudioItem.Size = new System.Drawing.Size(177, 22);
+            this.openAudioItem.Size = new System.Drawing.Size(206, 22);
             this.openAudioItem.Text = "Open audio file";
             this.openAudioItem.Click += new System.EventHandler(this.openAudioItem_Click);
             // 
             // closeAudioItem
             // 
             this.closeAudioItem.Name = "closeAudioItem";
-            this.closeAudioItem.Size = new System.Drawing.Size(177, 22);
+            this.closeAudioItem.Size = new System.Drawing.Size(206, 22);
             this.closeAudioItem.Text = "Close audio file";
             this.closeAudioItem.Click += new System.EventHandler(this.closeAudioItem_Click);
             // 
@@ -276,6 +278,39 @@
             this.writeThenCreateRemainingItem.Text = "Write then create remaining";
             this.writeThenCreateRemainingItem.Click += new System.EventHandler(this.writeThenCreateRemainingItem_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearFrameToolStripMenuItem,
+            this.drawBirdOnToolStripMenuItem,
+            this.drawBirdOffToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // clearFrameToolStripMenuItem
+            // 
+            this.clearFrameToolStripMenuItem.Name = "clearFrameToolStripMenuItem";
+            this.clearFrameToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.clearFrameToolStripMenuItem.Text = "Clear Frame";
+            this.clearFrameToolStripMenuItem.Click += new System.EventHandler(this.clearFrameToolStripMenuItem_Click);
+            // 
+            // drawBirdOnToolStripMenuItem
+            // 
+            this.drawBirdOnToolStripMenuItem.Name = "drawBirdOnToolStripMenuItem";
+            this.drawBirdOnToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.drawBirdOnToolStripMenuItem.Text = "Draw Bird On";
+            this.drawBirdOnToolStripMenuItem.Click += new System.EventHandler(this.drawBirdOnToolStripMenuItem_Click);
+            // 
+            // drawBirdOffToolStripMenuItem
+            // 
+            this.drawBirdOffToolStripMenuItem.Checked = true;
+            this.drawBirdOffToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.drawBirdOffToolStripMenuItem.Name = "drawBirdOffToolStripMenuItem";
+            this.drawBirdOffToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.drawBirdOffToolStripMenuItem.Text = "Draw Bird Off";
+            this.drawBirdOffToolStripMenuItem.Click += new System.EventHandler(this.drawBirdOffToolStripMenuItem_Click);
+            // 
             // openDlgRoto
             // 
             this.openDlgRoto.FileName = "openFileDialogRoto";
@@ -307,38 +342,12 @@
             // 
             this.saveDlgOutMovie.Filter = "MP4 Files (*.mp4)|*.mp4|All Files (*.*)|*.*";
             // 
-            // editToolStripMenuItem
+            // openBackgroundImageToolStripMenuItem
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearFrameToolStripMenuItem,
-            this.drawBirdOnToolStripMenuItem,
-            this.drawBirdOffToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // clearFrameToolStripMenuItem
-            // 
-            this.clearFrameToolStripMenuItem.Name = "clearFrameToolStripMenuItem";
-            this.clearFrameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.clearFrameToolStripMenuItem.Text = "Clear Frame";
-            this.clearFrameToolStripMenuItem.Click += new System.EventHandler(this.clearFrameToolStripMenuItem_Click);
-            // 
-            // drawBirdOnToolStripMenuItem
-            // 
-            this.drawBirdOnToolStripMenuItem.Name = "drawBirdOnToolStripMenuItem";
-            this.drawBirdOnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.drawBirdOnToolStripMenuItem.Text = "Draw Bird On";
-            this.drawBirdOnToolStripMenuItem.Click += new System.EventHandler(this.drawBirdOnToolStripMenuItem_Click);
-            // 
-            // drawBirdOffToolStripMenuItem
-            // 
-            this.drawBirdOffToolStripMenuItem.Checked = true;
-            this.drawBirdOffToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.drawBirdOffToolStripMenuItem.Name = "drawBirdOffToolStripMenuItem";
-            this.drawBirdOffToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.drawBirdOffToolStripMenuItem.Text = "Draw Bird Off";
-            this.drawBirdOffToolStripMenuItem.Click += new System.EventHandler(this.drawBirdOffToolStripMenuItem_Click);
+            this.openBackgroundImageToolStripMenuItem.Name = "openBackgroundImageToolStripMenuItem";
+            this.openBackgroundImageToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.openBackgroundImageToolStripMenuItem.Text = "Open Background Image";
+            this.openBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.openBackgroundImageToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -396,6 +405,7 @@
         private System.Windows.Forms.ToolStripMenuItem clearFrameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drawBirdOnToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem drawBirdOffToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openBackgroundImageToolStripMenuItem;
     }
 }
 

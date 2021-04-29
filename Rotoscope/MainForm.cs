@@ -502,5 +502,20 @@ namespace Rotoscope
             drawBirdOffToolStripMenuItem.Checked = true;
             drawBirdOnToolStripMenuItem.Checked = false;
         }
+
+        private void openBackgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openImage = new OpenFileDialog();
+            if (openImage.ShowDialog() == DialogResult.OK)
+            {
+                if (maker != null)
+                {
+                    maker.BackgroundImage = new Bitmap(openImage.FileName);
+                }
+            }
+
+            UpdateMenuBar();
+            Invalidate();
+        }
     }
 }
