@@ -72,7 +72,7 @@ namespace Rotoscope
         private Bitmap lastLoadedBitmap;
         private int position = 0;
         private int width = 0;
-        private int pullAmount = 3;
+        private int pullAmount = 2;
 
         #endregion
 

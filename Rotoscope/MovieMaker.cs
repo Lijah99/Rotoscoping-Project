@@ -24,7 +24,7 @@ namespace Rotoscope
         private int clipCount = 0;
         private string clipSaveName = "clip_";
         private string clipSavePath = "clips\\";
-        private int clipSize = 120;
+        private int clipSize = 60;
         private string frameSaveName = "frame_";
         private string frameSavePath = "frames\\";
         private string tempAudioSavePath = "tempAudioOutput.wav";
@@ -614,6 +614,7 @@ namespace Rotoscope
                     MainForm.VolitilePermissionDelete(file);
                 }
                 clipCount++;
+                System.GC.Collect();
             }
             catch (Exception e)
             {
@@ -649,7 +650,9 @@ namespace Rotoscope
             //    //apply greenscreen
             //    Greenscreen();
             //}
+            
             Greenscreen();
+
             form.Invalidate();
         }
 
@@ -679,32 +682,40 @@ namespace Rotoscope
         public void Greenscreen()
         {
             // alpha calculation
-            double a1 = 5;
-            double a2 = 1.5;
+            double a1 = 6;
+            double a2 = 2.75;
             double redForeground;
             double greenForeground;
+            double l1, l2 = 0;
+
+            Bitmap image = curFrame.Image;
+            Bitmap mask = Properties.Resources.catMask;
 
 
-
-            for (int r = 0; r < curFrame.Image.Height; r++)
+            for (int r = 0; r < backgroundImage.Height; r++)
             {
-                for (int c = 0; c < curFrame.Image.Width; c++)
+                for (int c = 0; c < backgroundImage.Width; c++)
                 {
-                    Color fore = curFrame.Image.GetPixel(c, r);
-                    Color back = backgroundImage.GetPixel(c, r);
+                    if(r < image.Height && c < image.Width)
+                    {
+                        l1 = mask.GetPixel(c, r).GetBrightness();
+                        l2 = 1 - l1;
 
-                    redForeground = fore.R;
-                    greenForeground = fore.G;
+                        int redFore = image.GetPixel(c, r).R;
+                        int blueFore = image.GetPixel(c, r).B;
+                        int greenFore = image.GetPixel(c, r).G;
+                        int redBack = backgroundImage.GetPixel(c, r).R;
+                        int blueBack = backgroundImage.GetPixel(c, r).B;
+                        int greenBack = backgroundImage.GetPixel(c, r).G;
+                        double alpha = (1 - a1 * (greenFore - ((l1 * a2) * redFore)) + l2);
+                        alpha = Clamp01(alpha);
 
-                    double alpha = (1 - a1 * (greenForeground - (a2 * redForeground)));
-                    alpha = Clamp01(alpha);
+                        Color final = Color.FromArgb((int)(alpha * redFore + (1 - alpha) * redBack),
+                                        (int)(alpha * redFore + (1 - alpha) * greenBack),
+                                        (int)(alpha * blueFore + (1 - alpha) * blueBack));
+                        curFrame.Image.SetPixel(c, r, final);
 
-
-
-                    Color final = Color.FromArgb((int)(alpha * fore.R + (1 - alpha) * back.R),
-                                         (int)(alpha * fore.G + (1 - alpha) * back.G),
-                                         (int)(alpha * fore.B + (1 - alpha) * back.B));
-                    curFrame.Image.SetPixel(c, r, final);
+                    }
                 }
             }
 

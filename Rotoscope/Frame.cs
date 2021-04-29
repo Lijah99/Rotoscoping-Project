@@ -154,6 +154,12 @@ namespace Rotoscope
             }
 
         }
+
+        ~Frame()
+        {
+            image.Dispose();
+            image = null;
+        }
         #endregion
 
         #region Save/open
