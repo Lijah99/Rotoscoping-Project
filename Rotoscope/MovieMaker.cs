@@ -627,31 +627,38 @@ namespace Rotoscope
 
             curFrame = new Frame(initial.Image);
 
-            // Write any saved drawings into the frame
-            //LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
-            //if (drawList != null)
-            //{
-            //    Point first = drawList.First.Value;
-            //    Point end = drawList.First.Next.Value;
-            //    if (BirdDraw)
-            //    {
-            //        Point location = drawList.ElementAt(0);
-            //        Graphics g = Graphics.FromImage(curFrame.Image);
-            //        bird.SetResolution(g.DpiX, g.DpiY);
-            //        int x = location.X - (bird.Width / 2);
-            //        int y = location.Y - (bird.Height);
+           // Write any saved drawings into the frame
+            LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
+            if (drawList != null)
+            {
+                //Point first = drawList.First.Value;
+                //Point end = drawList.First.Next.Value;
+                if (BirdDraw)
+                {
+                    Point location = drawList.ElementAt(0);
+                    Graphics g = Graphics.FromImage(curFrame.Image);
+                    bird.SetResolution(g.DpiX, g.DpiY);
+                    int x = location.X - (bird.Width / 2);
+                    int y = location.Y - (bird.Height);
 
-            //        curFrame.DrawImage(x, y, bird);
-            //    }
+                    curFrame.DrawImage(x, y, bird);
+                }
+                else
+                {
+                    drawList = roto.GetFromDrawList(framenum);
+                    if (drawList != null)
+                    {
+                        foreach (Point p in drawList)
+                        {
+                            curFrame.DrawDot(p.X, p.Y);
+                        }
+                    }
+                }
 
-            //    //DrawLine(first.X, first.Y, end.X, end.Y);
-            //   // RotateVideo(first.X, first.Y, end.X, end.Y);
 
-            //    //apply greenscreen
-            //    Greenscreen();
-            //}
+            }
             
-            Greenscreen();
+           // Greenscreen();
 
             form.Invalidate();
         }
