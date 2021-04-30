@@ -24,6 +24,7 @@ namespace Rotoscope
     public partial class MainForm : Form
     {
         Movie inputMovie = null;
+        Movie eliMovie = null;
         private string lastSave = null;
         MovieMaker maker = null;
 
@@ -261,6 +262,7 @@ namespace Rotoscope
             UpdateMenuBar();
             Invalidate();
         }
+
 
         private void generateVideoItem_Click(object sender, EventArgs e)
         {
@@ -514,6 +516,37 @@ namespace Rotoscope
                 }
             }
 
+            UpdateMenuBar();
+            Invalidate();
+        }
+
+        private void openEliVideoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openDlgMovie.ShowDialog() == DialogResult.OK)
+            {
+                if (eliMovie == null)
+                {
+                    eliMovie = new Movie();
+                }
+
+                eliMovie.Open(openDlgMovie.FileName);
+
+                //the first movie opened, should set the size of the output
+                SetupMaker();
+                if (maker.EliMovie == null)
+                {
+                    maker.EliWdith = eliMovie.Width;
+                    maker.EliHeight = eliMovie.Height;
+                }
+
+                maker.EliMovie = eliMovie;
+
+                //pull audio if  desired
+                if (useSourceAudioItem.Checked)
+                {
+                    maker.Audio = inputMovie.GetAudio();
+                }
+            }
             UpdateMenuBar();
             Invalidate();
         }

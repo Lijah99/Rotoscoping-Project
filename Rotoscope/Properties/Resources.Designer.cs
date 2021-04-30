@@ -63,9 +63,29 @@ namespace Rotoscope.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap amongUsGuyPic {
+            get {
+                object obj = ResourceManager.GetObject("amongUsGuyPic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap background {
             get {
                 object obj = ResourceManager.GetObject("background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap bodyReported {
+            get {
+                object obj = ResourceManager.GetObject("bodyReported", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +136,16 @@ namespace Rotoscope.Properties {
         public static byte[] colbert2 {
             get {
                 object obj = ResourceManager.GetObject("colbert2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] eliTrim {
+            get {
+                object obj = ResourceManager.GetObject("eliTrim", resourceCulture);
                 return ((byte[])(obj));
             }
         }

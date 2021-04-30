@@ -78,10 +78,22 @@ namespace Rotoscope
             }
         }
 
+        public Movie EliMovie
+        {
+            get => eliMovie;
+            set
+            {
+                eliMovie = value;
+            }
+        }
+
         /// <summary>
         /// Width of the movie
         /// </summary>
         public int Width { get => width; set => width = value; }
+
+        public int EliWdith { get => eliWidth; set => eliWidth = value; }
+        public int EliHeight { get => eliHeight; set => eliHeight = value; }
 
         public Bitmap BackgroundImage { get => backgroundImage; set => backgroundImage = value; }
 
@@ -94,6 +106,10 @@ namespace Rotoscope
         private int height = 720;
         private double outputTime = 0;
         private Movie sourceMovie = null;
+        private Movie eliMovie = null;
+        private int eliWidth;
+        private int eliHeight;
+
         //private int width = 720;
         private int width = 1280;
         private ProgressBar bar;
@@ -112,11 +128,13 @@ namespace Rotoscope
         /// 
         private Rotoscope roto = new Rotoscope();
         private Frame initial = new Frame();
+        private Frame initialEli = new Frame();
 
         private Boolean birdDraw = false;
         public Boolean BirdDraw { get => birdDraw; set => birdDraw = value; }
 
         Bitmap bird;
+        Bitmap bodyReported;
         public MovieMaker(MainForm form)
         {
             Close();
@@ -130,6 +148,8 @@ namespace Rotoscope
                 Directory.CreateDirectory(clipSavePath);
 
             bird = new Bitmap("bird.png"); //with bird.png set to copy to output  
+            bodyReported = Properties.Resources.bodyReported;
+
         }
 
         /// <summary>
@@ -280,6 +300,7 @@ namespace Rotoscope
             {
 
                 Bitmap newImage = sourceMovie.LoadNextFrameImage();
+
 
                 // sanity chack that an image is there
                 if (newImage != null)
@@ -624,10 +645,15 @@ namespace Rotoscope
 
         private void BuildFrame()
         {
+            double time = framenum / 30;
+            Bitmap elijahImage = eliMovie.LoadNextFrameImage();
+
 
             curFrame = new Frame(initial.Image);
+            Graphics g = Graphics.FromImage(curFrame.Image);
 
-           // Write any saved drawings into the frame
+
+           // Get cat drawing
             LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
             if (drawList != null)
             {
@@ -636,7 +662,6 @@ namespace Rotoscope
                 if (BirdDraw)
                 {
                     Point location = drawList.ElementAt(0);
-                    Graphics g = Graphics.FromImage(curFrame.Image);
                     bird.SetResolution(g.DpiX, g.DpiY);
                     int x = location.X - (bird.Width / 2);
                     int y = location.Y - (bird.Height);
@@ -657,8 +682,21 @@ namespace Rotoscope
 
 
             }
-            
-           // Greenscreen();
+
+            if(elijahImage != null)
+            {
+                GreenscreenNoMask(elijahImage);
+                elijahImage.SetResolution(g.DpiX, g.DpiY);
+                g.DrawImage(elijahImage, 0, 0);
+            }
+
+            if (time > 25)
+            {
+                bodyReported.SetResolution(g.DpiX, g.DpiY);
+                g.DrawImage(bodyReported, 0, 0);
+            }
+
+            //Greenscreen();
 
             form.Invalidate();
         }
@@ -721,6 +759,40 @@ namespace Rotoscope
                                         (int)(alpha * redFore + (1 - alpha) * greenBack),
                                         (int)(alpha * blueFore + (1 - alpha) * blueBack));
                         curFrame.Image.SetPixel(c, r, final);
+
+                    }
+                }
+            }
+
+        }
+
+        public void GreenscreenNoMask(Bitmap image)
+        {
+            backgroundImage = Properties.Resources.background;
+            // alpha calculation
+            double a1 = 6;
+            double a2 = 2.75;
+
+            for (int r = 0; r < backgroundImage.Height; r++)
+            {
+                for (int c = 0; c < backgroundImage.Width; c++)
+                {
+                    if (r < image.Height && c < image.Width)
+                    {
+
+                        int redFore = image.GetPixel(c, r).R;
+                        int blueFore = image.GetPixel(c, r).B;
+                        int greenFore = image.GetPixel(c, r).G;
+                        int redBack = backgroundImage.GetPixel(c, r).R;
+                        int blueBack = backgroundImage.GetPixel(c, r).B;
+                        int greenBack = backgroundImage.GetPixel(c, r).G;
+                        double alpha = (1 - a1 * (greenFore - (( a2) * redFore)));
+                        alpha = Clamp01(alpha);
+
+                        Color final = Color.FromArgb((int)(alpha * redFore + (1 - alpha) * redBack),
+                                        (int)(alpha * redFore + (1 - alpha) * greenBack),
+                                        (int)(alpha * blueFore + (1 - alpha) * blueBack));
+                        image.SetPixel(c, r, final);
 
                     }
                 }
