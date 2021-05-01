@@ -652,8 +652,10 @@ namespace Rotoscope
             curFrame = new Frame(initial.Image);
             Graphics g = Graphics.FromImage(curFrame.Image);
 
+           
 
-           // Get cat drawing
+
+            // Get cat drawing
             LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
             if (drawList != null)
             {
@@ -683,12 +685,21 @@ namespace Rotoscope
 
             }
 
-            if(elijahImage != null)
+            Greenscreen();
+            if (elijahImage != null)
             {
                 elijahImage.SetResolution(g.DpiX, g.DpiY);
                 GreenscreenNoMask(elijahImage);
                 g.DrawImage(elijahImage, 800, 0);
             }
+
+            Bitmap reportPic = Properties.Resources.reportBody;
+            reportPic.SetResolution(g.DpiX, g.DpiY);
+            g.DrawImage(reportPic, 1280 - reportPic.Width, 720 - reportPic.Height);
+
+            Bitmap imposter = Properties.Resources.amongUsGuyPic;
+            imposter.SetResolution(g.DpiX, g.DpiY);
+            g.DrawImage(imposter, 0, 720 - imposter.Height);
 
 
 
@@ -698,7 +709,7 @@ namespace Rotoscope
                 g.DrawImage(bodyReported, 0, 0);
             }
 
-            Greenscreen();
+            //Greenscreen();
 
             form.Invalidate();
         }
@@ -735,8 +746,11 @@ namespace Rotoscope
             double greenForeground;
             double l1, l2 = 0;
 
+
+            //MASK AND BACKGROUND
             Bitmap image = curFrame.Image;
             Bitmap mask = Properties.Resources.catMask;
+            backgroundImage = Properties.Resources.amongUsHallway;
 
 
             for (int r = 0; r < backgroundImage.Height; r++)
@@ -773,7 +787,7 @@ namespace Rotoscope
             backgroundImage = Properties.Resources.amongUsHallway;
             // alpha calculation
             double a1 = 5;
-            double a2 = 1.58;
+            double a2 = 1.25;
 
             int offset = 850;
 
