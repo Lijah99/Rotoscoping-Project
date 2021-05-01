@@ -685,18 +685,20 @@ namespace Rotoscope
 
             if(elijahImage != null)
             {
-                GreenscreenNoMask(elijahImage);
                 elijahImage.SetResolution(g.DpiX, g.DpiY);
-                g.DrawImage(elijahImage, 0, 0);
+                GreenscreenNoMask(elijahImage);
+                g.DrawImage(elijahImage, 800, 0);
             }
 
-            if (time > 25)
+
+
+            if (time > 28.5)
             {
                 bodyReported.SetResolution(g.DpiX, g.DpiY);
                 g.DrawImage(bodyReported, 0, 0);
             }
 
-            //Greenscreen();
+            Greenscreen();
 
             form.Invalidate();
         }
@@ -768,31 +770,33 @@ namespace Rotoscope
 
         public void GreenscreenNoMask(Bitmap image)
         {
-            backgroundImage = Properties.Resources.background;
+            backgroundImage = Properties.Resources.amongUsHallway;
             // alpha calculation
-            double a1 = 6;
-            double a2 = 2.75;
+            double a1 = 5;
+            double a2 = 1.58;
+
+            int offset = 850;
 
             for (int r = 0; r < backgroundImage.Height; r++)
             {
                 for (int c = 0; c < backgroundImage.Width; c++)
                 {
-                    if (r < image.Height && c < image.Width)
+                    if (r < image.Height && c >= offset)
                     {
 
-                        int redFore = image.GetPixel(c, r).R;
-                        int blueFore = image.GetPixel(c, r).B;
-                        int greenFore = image.GetPixel(c, r).G;
+                        int redFore = image.GetPixel(c - offset, r).R;
+                        int blueFore = image.GetPixel(c - offset, r).B;
+                        int greenFore = image.GetPixel(c - offset, r).G;
                         int redBack = backgroundImage.GetPixel(c, r).R;
                         int blueBack = backgroundImage.GetPixel(c, r).B;
                         int greenBack = backgroundImage.GetPixel(c, r).G;
-                        double alpha = (1 - a1 * (greenFore - (( a2) * redFore)));
+                        double alpha = (1 - a1 * (greenFore - ( a2 * redFore)));
                         alpha = Clamp01(alpha);
 
-                        Color final = Color.FromArgb((int)(alpha * redFore + (1 - alpha) * redBack),
-                                        (int)(alpha * redFore + (1 - alpha) * greenBack),
-                                        (int)(alpha * blueFore + (1 - alpha) * blueBack));
-                        image.SetPixel(c, r, final);
+                        Color final = Color.FromArgb((int)((alpha * redFore) + ((1 - alpha) * redBack)),
+                                        (int)((alpha * greenFore) + ((1 - alpha) * greenBack)),
+                                        (int)((alpha * blueFore) + ((1 - alpha) * blueBack)));
+                        image.SetPixel(c - offset, r, final);
 
                     }
                 }

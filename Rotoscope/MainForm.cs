@@ -544,7 +544,7 @@ namespace Rotoscope
                 //pull audio if  desired
                 if (useSourceAudioItem.Checked)
                 {
-                    maker.Audio = inputMovie.GetAudio();
+                    maker.Audio = eliMovie.GetAudio();
                 }
             }
             UpdateMenuBar();
