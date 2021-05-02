@@ -142,6 +142,9 @@
   <data name="colbert_5sec" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\res\colbert_5sec.wmv;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="eliCool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\materials\elicool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="reportBody" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\materials\reportbody.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

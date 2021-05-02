@@ -143,6 +143,16 @@ namespace Rotoscope.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap eliCool {
+            get {
+                object obj = ResourceManager.GetObject("eliCool", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap reportBody {
             get {
                 object obj = ResourceManager.GetObject("reportBody", resourceCulture);

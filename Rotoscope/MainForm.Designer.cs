@@ -49,6 +49,7 @@
             this.openAudioItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeAudioItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openBackgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openEliVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createFrameItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -67,7 +68,7 @@
             this.saveDlgAudio = new System.Windows.Forms.SaveFileDialog();
             this.openDlgOutMovie = new System.Windows.Forms.OpenFileDialog();
             this.saveDlgOutMovie = new System.Windows.Forms.SaveFileDialog();
-            this.openEliVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runProjectVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +78,8 @@
             this.fileToolStripMenuItem,
             this.moviesToolStripMenuItem,
             this.playbackToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.runProjectVideoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1108, 24);
@@ -234,6 +236,13 @@
             this.openBackgroundImageToolStripMenuItem.Text = "Open Background Image";
             this.openBackgroundImageToolStripMenuItem.Click += new System.EventHandler(this.openBackgroundImageToolStripMenuItem_Click);
             // 
+            // openEliVideoToolStripMenuItem
+            // 
+            this.openEliVideoToolStripMenuItem.Name = "openEliVideoToolStripMenuItem";
+            this.openEliVideoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.openEliVideoToolStripMenuItem.Text = "Open Eli Video";
+            this.openEliVideoToolStripMenuItem.Click += new System.EventHandler(this.openEliVideoToolStripMenuItem_Click);
+            // 
             // playbackToolStripMenuItem
             // 
             this.playbackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -300,14 +309,14 @@
             // clearFrameToolStripMenuItem
             // 
             this.clearFrameToolStripMenuItem.Name = "clearFrameToolStripMenuItem";
-            this.clearFrameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearFrameToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.clearFrameToolStripMenuItem.Text = "Clear Frame";
             this.clearFrameToolStripMenuItem.Click += new System.EventHandler(this.clearFrameToolStripMenuItem_Click);
             // 
             // drawBirdOnToolStripMenuItem
             // 
             this.drawBirdOnToolStripMenuItem.Name = "drawBirdOnToolStripMenuItem";
-            this.drawBirdOnToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.drawBirdOnToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.drawBirdOnToolStripMenuItem.Text = "Draw Bird On";
             this.drawBirdOnToolStripMenuItem.Click += new System.EventHandler(this.drawBirdOnToolStripMenuItem_Click);
             // 
@@ -316,7 +325,7 @@
             this.drawBirdOffToolStripMenuItem.Checked = true;
             this.drawBirdOffToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.drawBirdOffToolStripMenuItem.Name = "drawBirdOffToolStripMenuItem";
-            this.drawBirdOffToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.drawBirdOffToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.drawBirdOffToolStripMenuItem.Text = "Draw Bird Off";
             this.drawBirdOffToolStripMenuItem.Click += new System.EventHandler(this.drawBirdOffToolStripMenuItem_Click);
             // 
@@ -351,12 +360,12 @@
             // 
             this.saveDlgOutMovie.Filter = "MP4 Files (*.mp4)|*.mp4|All Files (*.*)|*.*";
             // 
-            // openEliVideoToolStripMenuItem
+            // runProjectVideoToolStripMenuItem
             // 
-            this.openEliVideoToolStripMenuItem.Name = "openEliVideoToolStripMenuItem";
-            this.openEliVideoToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.openEliVideoToolStripMenuItem.Text = "Open Eli Video";
-            this.openEliVideoToolStripMenuItem.Click += new System.EventHandler(this.openEliVideoToolStripMenuItem_Click);
+            this.runProjectVideoToolStripMenuItem.Name = "runProjectVideoToolStripMenuItem";
+            this.runProjectVideoToolStripMenuItem.Size = new System.Drawing.Size(118, 20);
+            this.runProjectVideoToolStripMenuItem.Text = "Load Project Video";
+            this.runProjectVideoToolStripMenuItem.Click += new System.EventHandler(this.runProjectVideoToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -416,6 +425,7 @@
         private System.Windows.Forms.ToolStripMenuItem drawBirdOffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openBackgroundImageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openEliVideoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runProjectVideoToolStripMenuItem;
     }
 }
 

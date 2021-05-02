@@ -102,15 +102,13 @@ namespace Rotoscope
         private Bitmap backgroundImage;
         private double fps = 30;
         private int framenum = 0;
-        //private int height = 480;
+
         private int height = 720;
         private double outputTime = 0;
         private Movie sourceMovie = null;
         private Movie eliMovie = null;
         private int eliWidth;
         private int eliHeight;
-
-        //private int width = 720;
         private int width = 1280;
         private ProgressBar bar;
         private Rectangle drawArea = new Rectangle(100, 100, 100, 100);
@@ -119,6 +117,12 @@ namespace Rotoscope
         private Font drawFont = new Font("Arial", 16);
         private SolidBrush drawBrush = new SolidBrush(Color.Red);
         private string processing = "";
+        //physics animation stuff
+        private int guyX = 1;
+        private int guyY = 1;
+        private int speedX = 180;
+        private int speedY = 180;
+
         #endregion
 
         /// <summary>
@@ -685,13 +689,13 @@ namespace Rotoscope
 
             }
 
-            Greenscreen();
-            if (elijahImage != null)
-            {
-                elijahImage.SetResolution(g.DpiX, g.DpiY);
-                GreenscreenNoMask(elijahImage);
-                g.DrawImage(elijahImage, 800, 0);
-            }
+            //Greenscreen();
+            //if (elijahImage != null)
+            //{
+            //    elijahImage.SetResolution(g.DpiX, g.DpiY);
+            //    GreenscreenNoMask(elijahImage);
+            //    g.DrawImage(elijahImage, 800, 0);
+            //}
 
             Bitmap reportPic = Properties.Resources.reportBody;
             reportPic.SetResolution(g.DpiX, g.DpiY);
@@ -701,8 +705,38 @@ namespace Rotoscope
             imposter.SetResolution(g.DpiX, g.DpiY);
             g.DrawImage(imposter, 0, 720 - imposter.Height);
 
+            //PHYSICS******************************************
+            Bitmap eliCool = Properties.Resources.eliCool;
+            eliCool.SetResolution(g.DpiX, g.DpiY);
+            guyX = guyX + (speedX / 30);
+            guyY = guyY + (speedY / 30);
+
+            if(guyX + eliCool.Width >= width)
+            {
+                speedX *= -1;
+                guyX = width - eliCool.Width;
+            }
+            else if(guyX <= 0)
+            {
+                speedX *= -1;
+                guyX = 0;
+            }
+
+            if(guyY + eliCool.Height >= height)
+            {
+                speedY *= -1;
+                guyY = height - eliCool.Height;
+
+            }
+            else if(guyY <= 0)
+            {
+                speedY *= -1;
+                guyY = 0;
+            }
+            g.DrawImage(eliCool, guyX, guyY);
 
 
+            //ending drawing
             if (time > 28.5)
             {
                 bodyReported.SetResolution(g.DpiX, g.DpiY);

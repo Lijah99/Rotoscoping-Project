@@ -264,6 +264,7 @@ namespace Rotoscope
         }
 
 
+
         private void generateVideoItem_Click(object sender, EventArgs e)
         {
             if (saveDlgOutMovie.ShowDialog() == DialogResult.OK)
@@ -546,6 +547,45 @@ namespace Rotoscope
                 {
                     maker.Audio = eliMovie.GetAudio();
                 }
+            }
+            UpdateMenuBar();
+            Invalidate();
+        }
+
+        private void runProjectVideoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (inputMovie == null)
+            {
+                inputMovie = new Movie();
+            }
+            if (eliMovie == null)
+            {
+                eliMovie = new Movie();
+            }
+
+            eliMovie.Open("materials\\eliTrim.mp4");
+            inputMovie.Open("materials\\catTrim.wmv");
+
+            //the first movie opened, should set the size of the output
+            SetupMaker();
+            if (maker.SourceMovie == null)
+            {
+                maker.Width = inputMovie.Width;
+                maker.Height = inputMovie.Height;
+            }
+            if (maker.EliMovie == null)
+            {
+                maker.EliWdith = eliMovie.Width;
+                maker.EliHeight = eliMovie.Height;
+            }
+
+            maker.EliMovie = eliMovie;
+            maker.SourceMovie = inputMovie;
+
+            //pull audio if  desired
+            if (useSourceAudioItem.Checked)
+            {
+                maker.Audio = eliMovie.GetAudio();
             }
             UpdateMenuBar();
             Invalidate();
