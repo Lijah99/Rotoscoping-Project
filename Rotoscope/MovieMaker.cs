@@ -118,10 +118,13 @@ namespace Rotoscope
         private SolidBrush drawBrush = new SolidBrush(Color.Red);
         private string processing = "";
         //physics animation stuff
-        private int guyX = 1;
-        private int guyY = 1;
+        private int logoX = 1;
+        private int logoY = 1;
         private int speedX = 180;
         private int speedY = 180;
+
+        private int guyX = -260;
+        private int guyY = 0;
 
         #endregion
 
@@ -703,39 +706,43 @@ namespace Rotoscope
 
             Bitmap imposter = Properties.Resources.amongUsGuyPic;
             imposter.SetResolution(g.DpiX, g.DpiY);
-            g.DrawImage(imposter, 0, 720 - imposter.Height);
+            guyY = height - imposter.Height;
 
             //PHYSICS******************************************
             Bitmap eliCool = Properties.Resources.eliCool;
             eliCool.SetResolution(g.DpiX, g.DpiY);
-            guyX = guyX + (speedX / 30);
-            guyY = guyY + (speedY / 30);
+            logoX = logoX + (speedX / 30);
+            logoY = logoY + (speedY / 30);
 
-            if(guyX + eliCool.Width >= width)
+            if(logoX + eliCool.Width >= width)
             {
                 speedX *= -1;
-                guyX = width - eliCool.Width;
+                logoX = width - eliCool.Width;
             }
-            else if(guyX <= 0)
+            else if(logoX <= 0)
             {
                 speedX *= -1;
-                guyX = 0;
+                logoX = 0;
             }
 
-            if(guyY + eliCool.Height >= height)
+            if(logoY + eliCool.Height >= height)
             {
                 speedY *= -1;
-                guyY = height - eliCool.Height;
+                logoY = height - eliCool.Height;
 
             }
-            else if(guyY <= 0)
+            else if(logoY <= 0)
             {
                 speedY *= -1;
-                guyY = 0;
+                logoY = 0;
             }
-            g.DrawImage(eliCool, guyX, guyY);
+            g.DrawImage(eliCool, logoX, logoY);
 
-
+            if(time > 19 && guyX < 10)
+            {
+                guyX += speedX/30;
+            }
+            g.DrawImage(imposter, guyX, guyY);
             //ending drawing
             if (time > 28.5)
             {
