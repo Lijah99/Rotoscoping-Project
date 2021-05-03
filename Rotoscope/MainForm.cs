@@ -578,6 +578,8 @@ namespace Rotoscope
                 maker.EliWdith = eliMovie.Width;
                 maker.EliHeight = eliMovie.Height;
             }
+            if (maker != null)
+                maker.OnOpenRotoscope("materials\\oops2.xml");
 
             maker.EliMovie = eliMovie;
             maker.SourceMovie = inputMovie;
@@ -585,7 +587,7 @@ namespace Rotoscope
             //pull audio if  desired
             if (useSourceAudioItem.Checked)
             {
-                maker.Audio = eliMovie.GetAudio();
+                maker.Audio = new Sound("materials\\audio.mp3");
             }
             UpdateMenuBar();
             Invalidate();

@@ -692,13 +692,13 @@ namespace Rotoscope
 
             }
 
-            //Greenscreen();
-            //if (elijahImage != null)
-            //{
-            //    elijahImage.SetResolution(g.DpiX, g.DpiY);
-            //    GreenscreenNoMask(elijahImage);
-            //    g.DrawImage(elijahImage, 800, 0);
-            //}
+            Greenscreen();
+            if (elijahImage != null)
+            {
+                elijahImage.SetResolution(g.DpiX, g.DpiY);
+                GreenscreenNoMask(elijahImage);
+                g.DrawImage(elijahImage, 800, 0);
+            }
 
             Bitmap reportPic = Properties.Resources.reportBody;
             reportPic.SetResolution(g.DpiX, g.DpiY);
@@ -743,6 +743,7 @@ namespace Rotoscope
                 guyX += speedX/30;
             }
             g.DrawImage(imposter, guyX, guyY);
+            
             //ending drawing
             if (time > 28.5)
             {
@@ -750,7 +751,6 @@ namespace Rotoscope
                 g.DrawImage(bodyReported, 0, 0);
             }
 
-            //Greenscreen();
 
             form.Invalidate();
         }
