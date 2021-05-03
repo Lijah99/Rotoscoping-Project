@@ -6,15 +6,53 @@ using System.Threading;
 using System.Windows.Forms;
 
 
-//___x___ 25  Tutorial completed(honor system on this one)
-//___x___ 10  Video: colbert1a draws any line
-//___x___	10	Video: colbert1a line is white
-//___x___	5	Video: colbert1b line is red
-//___x___	10	Video: colbert1b line is 2 pixels wide
-//___x___	15	Video: colbert2 Put a Bird On It
-//___x___	20	Video: colbert3 rotation
-//___x___	5	Video: colbert3 line is green
-//__100___	Total (please add the points and include the total here)
+//Total available points:  200(200 for CSC 692)
+
+// SEARCH "GRADING" tag for grading locations in MOVIEMAKER.CS
+
+//    __20___  20(40 pt if a team) Suitable length input video files and documentation turned in.
+
+//__35__	35	Something that produces a result video beyond what tutorial 5 would have done (this can be simply the resize and new length).
+
+//___20___ 20(40pt if a team) You / pet / your own image(CSC 692 video) (for each person in a team) appears in your video
+//			File name of your video: 
+			
+//___55___ 55  Category I requirement
+//			Item: Rotoscoped Cat
+//			File and location: MoveMaker.cs, materials\outlineCat.xml, GRADING tag in BuildFrame function
+			
+//____35__ 35  Category II requirement
+//			Item: Eli is cool pic physics based animation eliCool.png 
+//			File and location:  MovieMaker.cs materials\eliCool.png, Grading tage in BuildFrame function
+			
+//___35___ 35  Category III requirement
+//			Item: Green Screen Chroma Key with mask
+//			File and location: MovieMaker.cs in BuildFrame, it performs the green screen on the cat and replaces the background
+//            with a given background. A garbage mask is used in making the green screen cleaner.
+
+			
+//NA 20  Attended final exam to show off your video.
+			
+//------------------------------------------------------------------------------------------
+			
+//_____	35	TEAM only additional item 1: 
+//			File name of your video: 
+//______ 35  TEAM only additional item 2:
+//			File and location:  
+			
+//------------------------------------------------------------------------------------------
+//______  35  CSC 692 ONLY additional item
+//			File name of your video: 	
+			
+//------------------------------------------------------------------------------------------
+
+
+
+//____200__  Total(please add the points and include the total here)
+
+//How I implemented a garbage mask (if applicable): I have a file: maskcatyes which is used as the garbage mask when 
+// brightness is checked 
+
 
 namespace Rotoscope
 {
@@ -579,7 +617,7 @@ namespace Rotoscope
                 maker.EliHeight = eliMovie.Height;
             }
             if (maker != null)
-                maker.OnOpenRotoscope("materials\\oops2.xml");
+                maker.OnOpenRotoscope("materials\\outlineCat.xml");
 
             maker.EliMovie = eliMovie;
             maker.SourceMovie = inputMovie;

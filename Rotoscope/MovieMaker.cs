@@ -650,6 +650,7 @@ namespace Rotoscope
             }
         }
 
+        //GRADING: BUILD FRAME
         private void BuildFrame()
         {
             double time = framenum / 30;
@@ -663,6 +664,7 @@ namespace Rotoscope
 
 
             // Get cat drawing
+            // GRADING: SECTION ONE ROTOSCOPE
             LinkedList<Point> drawList = roto.GetFromDrawList(framenum);
             if (drawList != null)
             {
@@ -692,12 +694,14 @@ namespace Rotoscope
 
             }
 
+            // GRADING: SECTION THREE
             Greenscreen();
+            // GRADING: SELF
             if (elijahImage != null)
             {
                 elijahImage.SetResolution(g.DpiX, g.DpiY);
                 GreenscreenNoMask(elijahImage);
-                g.DrawImage(elijahImage, 800, 0);
+                g.DrawImage(elijahImage, 820, 0);
             }
 
             Bitmap reportPic = Properties.Resources.reportBody;
@@ -708,42 +712,42 @@ namespace Rotoscope
             imposter.SetResolution(g.DpiX, g.DpiY);
             guyY = height - imposter.Height;
 
-            //PHYSICS******************************************
+            //GRADING: SECTION TWO PHYSICS ANIMATION******************************************
             Bitmap eliCool = Properties.Resources.eliCool;
             eliCool.SetResolution(g.DpiX, g.DpiY);
             logoX = logoX + (speedX / 30);
             logoY = logoY + (speedY / 30);
 
-            if(logoX + eliCool.Width >= width)
+            if (logoX + eliCool.Width >= width)
             {
                 speedX *= -1;
                 logoX = width - eliCool.Width;
             }
-            else if(logoX <= 0)
+            else if (logoX <= 0)
             {
                 speedX *= -1;
                 logoX = 0;
             }
 
-            if(logoY + eliCool.Height >= height)
+            if (logoY + eliCool.Height >= height)
             {
                 speedY *= -1;
                 logoY = height - eliCool.Height;
 
             }
-            else if(logoY <= 0)
+            else if (logoY <= 0)
             {
                 speedY *= -1;
                 logoY = 0;
             }
             g.DrawImage(eliCool, logoX, logoY);
 
-            if(time > 19 && guyX < 10)
+            if (time > 19 && guyX < 10)
             {
-                guyX += speedX/30;
+                guyX += speedX / 30;
             }
             g.DrawImage(imposter, guyX, guyY);
-            
+
             //ending drawing
             if (time > 28.5)
             {
@@ -787,7 +791,7 @@ namespace Rotoscope
             double greenForeground;
             double l1, l2 = 0;
 
-
+            // GRADING: SECTION THREE MASK
             //MASK AND BACKGROUND
             Bitmap image = curFrame.Image;
             Bitmap mask = Properties.Resources.catMask;
@@ -830,7 +834,7 @@ namespace Rotoscope
             double a1 = 5;
             double a2 = 1.25;
 
-            int offset = 850;
+            int offset = 820;
 
             for (int r = 0; r < backgroundImage.Height; r++)
             {
@@ -852,7 +856,6 @@ namespace Rotoscope
                                         (int)((alpha * greenFore) + ((1 - alpha) * greenBack)),
                                         (int)((alpha * blueFore) + ((1 - alpha) * blueBack)));
                         image.SetPixel(c - offset, r, final);
-
                     }
                 }
             }
